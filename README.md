@@ -1,6 +1,12 @@
-# Product Name
+# Refds Router
 
-One to two paragraph statement about your product and what it does.
+Refds Router is a library that simplifies the implementation of the router design pattern in SwiftUI applications. The router pattern is essential for managing navigation between different screens or views in an iOS application. This library provides a simple and flexible framework for managing the navigation flow in your SwiftUI app.
+
+## Key Features
+
+- [X] Navigation management between SwiftUI views in a declarative manner.
+- [X] Support for stack-based navigation and modal presentation.
+- [X] Simple and easy-to-use interface.
 
 ## Installation
 
@@ -11,15 +17,15 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/rafaelesantos/.git", branch: "main")
+        .package(url: "https://github.com/rafaelesantos/refds-router.git", branch: "main")
     ],
     targets: [
         .target(
             name: "YourProject",
             dependencies: [
                 .product(
-                    name: "",
-                    package: ""),
+                    name: "RefdsRouter",
+                    package: "refds-router"),
             ]),
     ]
 )

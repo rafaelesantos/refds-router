@@ -1,5 +1,7 @@
 # Refds Router
 
+[![CI](https://github.com/rafaelesantos/refds-router/actions/workflows/swift.yml/badge.svg)](https://github.com/rafaelesantos/refds-router/actions/workflows/swift.yml)
+
 Refds Router is a library that simplifies the implementation of the router design pattern in SwiftUI applications. The router pattern is essential for managing navigation between different screens or views in an iOS application. This library provides a simple and flexible framework for managing the navigation flow in your SwiftUI app.
 
 ## Key Features

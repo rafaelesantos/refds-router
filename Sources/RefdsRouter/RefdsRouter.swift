@@ -10,7 +10,7 @@ public class RefdsRouter<Destination: RefdsRoutable>: ObservableObject {
         presentingSheet != nil || presentingFullScreenCover != nil
     }
     
-    public init(isPresented: Binding<Destination?>) {
+    init(isPresented: Binding<Destination?>) {
         self.isPresented = isPresented
     }
     

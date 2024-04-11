@@ -4,14 +4,13 @@ public struct RefdsRoutingView<
     Content: View,
     Destination: RefdsRoutable
 >: View {
-    @Binding var router: RefdsRouter<Destination>
+    @StateObject var router: RefdsRouter<Destination> = .init(isPresented: .constant(.none))
     private let content: (RefdsRouter<Destination>) -> Content
     
     public init(
-        router: Binding<RefdsRouter<Destination>>,
+        type: Destination.Type,
         @ViewBuilder content: @escaping (RefdsRouter<Destination>) -> Content
     ) {
-        self._router = router
         self.content = content
     }
     

@@ -6,18 +6,16 @@ public struct RefdsRoutingReduxView<
     State: RefdsReduxState,
     Destination: RefdsRoutableRedux
 >: View {
+    @EnvironmentObject private var store: RefdsReduxStore<State>
     @Binding private var router: RefdsRouterRedux<Destination>
-    @Binding private var store: RefdsReduxStore<State>
     private let content: () -> Content
     
     public init(
         router: Binding<RefdsRouterRedux<Destination>>,
-        store: Binding<RefdsReduxStore<State>>,
         stateType: State.Type,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self._router = router
-        self._store = store
         self.content = content
     }
     

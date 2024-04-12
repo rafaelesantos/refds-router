@@ -6,25 +6,27 @@ public struct RefdsRoutingReduxView<
     State: RefdsReduxState,
     Destination: RefdsRoutableRedux
 >: View {
-    @EnvironmentObject private var store: RefdsReduxStore<State>
     @Binding private var router: RefdsRouterRedux<Destination>
+    @Binding private var state: State
+    private let action: (RefdsReduxAction) -> Void
     private let content: () -> Content
     
     public init(
         router: Binding<RefdsRouterRedux<Destination>>,
-        stateType: State.Type,
+        state: Binding<State>,
+        action: @escaping (RefdsReduxAction) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self._router = router
+        self._state = state
+        self.action = action
         self.content = content
     }
     
     private var bindingState: Binding<RefdsReduxState> {
-        Binding {
-            store.state
-        } set: {
-            guard let state = $0 as? State else { return }
-            store.state = state
+        Binding { state } set: {
+            guard let newState = $0 as? State else { return }
+            state = newState
         }
     }
     
@@ -35,7 +37,7 @@ public struct RefdsRoutingReduxView<
                     router.view(
                         for: $0,
                         state: bindingState,
-                        action: store.dispatch(action:)
+                        action: action
                     )
                 }
         }
@@ -43,14 +45,14 @@ public struct RefdsRoutingReduxView<
             router.view(
                 for: $0,
                 state: bindingState,
-                action: store.dispatch(action:)
+                action: action
             )
         }
         .refdsFullScreenCover(item: $router.presentingFullScreenCover) {
             router.view(
                 for: $0,
                 state: bindingState,
-                action: store.dispatch(action:)
+                action: action
             )
         }
     }

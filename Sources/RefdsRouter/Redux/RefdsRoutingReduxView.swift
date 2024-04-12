@@ -13,6 +13,7 @@ public struct RefdsRoutingReduxView<
     public init(
         router: Binding<RefdsRouterRedux<Destination>>,
         store: Binding<RefdsReduxStore<State>>,
+        stateType: State.Type,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self._router = router

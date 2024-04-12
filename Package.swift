@@ -20,8 +20,14 @@ let package = Package(
             name: "RefdsRouter",
             targets: ["RefdsRouter"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/rafaelesantos/refds-design-patterns.git", branch: "main")
+    ],
     targets: [
         .target(
-            name: "RefdsRouter"),
+            name: "RefdsRouter",
+            dependencies: [
+                .product(name: "RefdsDesignPatterns", package: "refds-design-patterns")
+            ]),
     ]
 )

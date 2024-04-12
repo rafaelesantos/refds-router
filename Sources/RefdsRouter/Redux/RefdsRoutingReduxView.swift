@@ -3,17 +3,16 @@ import RefdsRedux
 
 public struct RefdsRoutingReduxView<
     Content: View,
-    State: RefdsReduxState,
     Destination: RefdsRoutableRedux
 >: View {
     @Binding private var router: RefdsRouterRedux<Destination>
-    @Binding private var state: State
+    @Binding private var state: RefdsReduxState
     private let action: (RefdsReduxAction) -> Void
     private let content: () -> Content
     
     public init(
         router: Binding<RefdsRouterRedux<Destination>>,
-        state: Binding<State>,
+        state: Binding<RefdsReduxState>,
         action: @escaping (RefdsReduxAction) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -23,20 +22,13 @@ public struct RefdsRoutingReduxView<
         self.content = content
     }
     
-    private var bindingState: Binding<RefdsReduxState> {
-        Binding { state } set: {
-            guard let newState = $0 as? State else { return }
-            state = newState
-        }
-    }
-    
     public var body: some View {
         NavigationStack(path: $router.path) {
             content()
                 .navigationDestination(for: Destination.self) {
                     router.view(
                         for: $0,
-                        state: bindingState,
+                        state: $state,
                         action: action
                     )
                 }
@@ -44,14 +36,14 @@ public struct RefdsRoutingReduxView<
         .sheet(item: $router.presentingSheet) {
             router.view(
                 for: $0,
-                state: bindingState,
+                state: $state,
                 action: action
             )
         }
         .refdsFullScreenCover(item: $router.presentingFullScreenCover) {
             router.view(
                 for: $0,
-                state: bindingState,
+                state: $state,
                 action: action
             )
         }

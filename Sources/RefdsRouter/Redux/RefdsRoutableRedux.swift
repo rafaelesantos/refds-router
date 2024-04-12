@@ -9,7 +9,7 @@ public protocol RefdsRoutableRedux: Hashable, Identifiable {
     func view(
         router: RefdsRouterRedux<Self>,
         state: Binding<State>,
-        action: (RefdsReduxAction) -> Void
+        action: @escaping (RefdsReduxAction) -> Void
     ) -> ViewType
 }
 

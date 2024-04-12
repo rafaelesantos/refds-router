@@ -21,7 +21,7 @@ public class RefdsRouterRedux<
     public func view(
         for route: Destination,
         state: Binding<Destination.State>,
-        action: (RefdsReduxAction) -> Void
+        action: @escaping (RefdsReduxAction) -> Void
     ) -> some View {
         let router = router(type: route.navigationType)
         route.view(router: router, state: state, action: action)

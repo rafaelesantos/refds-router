@@ -2,13 +2,12 @@ import SwiftUI
 import RefdsRedux
 
 public protocol RefdsRoutableRedux: Hashable, Identifiable {
-    associatedtype State: RefdsReduxState
     associatedtype ViewType: View
     var navigationType: RefdsNavigationType { get }
     
     func view(
         router: RefdsRouterRedux<Self>,
-        state: Binding<State>,
+        state: Binding<RefdsReduxState>,
         action: @escaping (RefdsReduxAction) -> Void
     ) -> ViewType
 }

@@ -4,17 +4,16 @@ import RefdsRedux
 @preconcurrency
 public struct RefdsReduxRoutingView<
     Content: View,
-    Destination: RefdsRoutableRedux,
-    State: RefdsReduxState
+    Destination: RefdsRoutableRedux
 >: View {
-    @Binding var router: RefdsRouterRedux<Destination, State>
-    @Binding var store: RefdsReduxStore<State>
-    private let content: (RefdsRouterRedux<Destination, State>) -> Content
+    @Binding var router: RefdsRouterRedux<Destination>
+    @Binding var store: RefdsReduxStore<RefdsReduxState>
+    private let content: (RefdsRouterRedux<Destination>) -> Content
     
     public init(
-        router: Binding<RefdsRouterRedux<Destination, State>>,
-        store: Binding<RefdsReduxStore<State>>,
-        @ViewBuilder content: @escaping (RefdsRouterRedux<Destination, State>) -> Content
+        router: Binding<RefdsRouterRedux<Destination>>,
+        store: Binding<RefdsReduxStore<RefdsReduxState>>,
+        @ViewBuilder content: @escaping (RefdsRouterRedux<Destination>) -> Content
     ) {
         self._router = router
         self._store = store

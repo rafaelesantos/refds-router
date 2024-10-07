@@ -3,17 +3,16 @@ import RefdsRedux
 
 public struct RefdsRoutingReduxView<
     Content: View,
-    Destination: RefdsRoutableRedux,
-    State: RefdsReduxState
+    Destination: RefdsRoutableRedux
 >: View {
-    @Binding private var router: RefdsRouterRedux<Destination, State>
-    @Binding private var state: State
+    @Binding private var router: RefdsRouterRedux<Destination>
+    @Binding private var state: RefdsReduxState
     private let action: (RefdsReduxAction) -> Void
     private let content: () -> Content
     
     public init(
-        router: Binding<RefdsRouterRedux<Destination, State>>,
-        state: Binding<State>,
+        router: Binding<RefdsRouterRedux<Destination>>,
+        state: Binding<RefdsReduxState>,
         action: @escaping (RefdsReduxAction) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {

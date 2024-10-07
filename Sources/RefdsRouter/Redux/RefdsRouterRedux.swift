@@ -2,10 +2,7 @@ import SwiftUI
 import RefdsRedux
 
 @MainActor
-public class RefdsRouterRedux<
-    Destination: RefdsRoutableRedux,
-    State: RefdsReduxState
->: ObservableObject {
+public class RefdsRouterRedux<Destination: RefdsRoutableRedux>: ObservableObject {
     @Published public var path: NavigationPath = NavigationPath()
     @Published public var presentingSheet: Destination?
     @Published public var presentingFullScreenCover: Destination?
@@ -22,11 +19,14 @@ public class RefdsRouterRedux<
     @ViewBuilder
     public func view(
         for route: Destination,
-        state: Binding<State>,
+        state: Binding<RefdsReduxState>,
         action: (RefdsReduxAction) async -> Void
     ) -> some View {
-        let router = router(type: route.navigationType)
-        route.view(router: router, state: state, action: action)
+        route.view(
+            router: router(type: route.navigationType),
+            state: state,
+            action: action
+        )
     }
     
     public func route(to destination: Destination) {

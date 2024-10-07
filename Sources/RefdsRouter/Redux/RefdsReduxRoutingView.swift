@@ -7,12 +7,12 @@ public struct RefdsReduxRoutingView<
     Destination: RefdsRoutableRedux
 >: View {
     @Binding var router: RefdsRouterRedux<Destination>
-    @Binding var store: RefdsReduxStore<RefdsReduxState>
+    @Binding var store: RefdsReduxStore
     private let content: (RefdsRouterRedux<Destination>) -> Content
     
     public init(
         router: Binding<RefdsRouterRedux<Destination>>,
-        store: Binding<RefdsReduxStore<RefdsReduxState>>,
+        store: Binding<RefdsReduxStore>,
         @ViewBuilder content: @escaping (RefdsRouterRedux<Destination>) -> Content
     ) {
         self._router = router
